@@ -1,7 +1,7 @@
 from cv2 import FlannBasedMatcher, cv2
 import mediapipe as mp
 import time
-
+from datetime import datetime
 
 def main():
     cap = cv2.VideoCapture(0) 
@@ -16,8 +16,21 @@ def main():
     clap_count = 0
     cnt_flag = True
 
+    now = datetime.now() #현재시간
+    flag0 = now.minute #현재 minute
+
     # clap count 어디선가 초기화
     while True:
+        #minute을 계속 받아와서 매 분마다 알람을 출력하는 코드
+        now = datetime.now()
+        flag1 = now.minute
+        if flag0 != flag1:
+            print("===========>alarm<===========")
+            print("===========>alarm<===========")
+            print("===========>alarm<===========")
+            print("===========>alarm<===========")
+            print("===========>alarm<===========")
+            flag0 = flag1
         frame_cnt += 1
         success, img = cap.read()
 
