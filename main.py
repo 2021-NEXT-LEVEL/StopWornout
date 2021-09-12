@@ -1,7 +1,8 @@
-from cv2 import FlannBasedMatcher, cv2
+from cv2 import cv2
 import mediapipe as mp
 from datetime import datetime
-from playsound import playsound
+import winsound
+
 
 def main():
     cap = cv2.VideoCapture(0) 
@@ -15,6 +16,7 @@ def main():
     frame_cnt = 0
     clap_count = 0
     cnt_flag = True
+    clap_flag = False
 
     now = datetime.now() #현재시간
     flag0 = now.minute #현재 minute
@@ -24,13 +26,20 @@ def main():
         #minute을 계속 받아와서 매 분마다 알람을 출력하는 코드
         now = datetime.now()
         flag1 = now.minute
+        
+        # 제스처 인식 시, 알람 끄기
+        if clap_flag == True:
+           winsound.PlaySound(None, winsound.SND_ASYNC)
+           clap_flag = False
+
         if flag0 != flag1:
-            playsound("alarm.wav")
             print("===========>alarm<===========")
             print("===========>alarm<===========")
             print("===========>alarm<===========")
             print("===========>alarm<===========")
             print("===========>alarm<===========")
+            winsound.PlaySound('alarm.wav',winsound.SND_ASYNC)
+            
             flag0 = flag1
         frame_cnt += 1
         success, img = cap.read()
@@ -71,7 +80,8 @@ def main():
                     cnt_flag = True
 
         if clap_count == 3:
-            break
+            clap_count = 0
+            clap_flag = True
 
         cv2.imshow("Image", img)
         cv2.waitKey(1)
