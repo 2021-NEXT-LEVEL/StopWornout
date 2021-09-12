@@ -1,7 +1,7 @@
 from cv2 import FlannBasedMatcher, cv2
 import mediapipe as mp
-import time
 from datetime import datetime
+from playsound import playsound
 
 def main():
     cap = cv2.VideoCapture(0) 
@@ -25,6 +25,7 @@ def main():
         now = datetime.now()
         flag1 = now.minute
         if flag0 != flag1:
+            playsound("alarm.wav")
             print("===========>alarm<===========")
             print("===========>alarm<===========")
             print("===========>alarm<===========")
