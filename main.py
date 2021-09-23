@@ -1,7 +1,7 @@
 import cv2
 import mediapipe as mp
 from datetime import datetime
-# import winsound
+from playsound import playsound
 
 def main():
     cap = cv2.VideoCapture(0) 
@@ -81,6 +81,7 @@ def main():
         if clap_count == 3:
             clap_count = 0
             clap_flag = True
+            playsound("alarm.wav")
 
         cv2.imshow("Image", img)
         cv2.waitKey(1)
