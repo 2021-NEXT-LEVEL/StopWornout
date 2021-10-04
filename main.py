@@ -1,8 +1,8 @@
 from cv2 import cv2
 import mediapipe as mp
 from datetime import datetime
-import winsound
-
+#import winsound
+import pygame
 
 def main():
     cap = cv2.VideoCapture(0) 
@@ -10,6 +10,9 @@ def main():
     mpHands = mp.solutions.hands
     hands = mpHands.Hands()
     mpDraw = mp.solutions.drawing_utils
+
+    pygame.mixer.init()
+    pygame.mixer.music.load("alarm.wav")
 
     pTime = 0 #이전 시간
     cTime = 0 #현재 시간
@@ -29,8 +32,8 @@ def main():
         
         # 제스처 인식 시, 알람 끄기
         if clap_flag == True:
-           winsound.PlaySound(None, winsound.SND_ASYNC)
-           clap_flag = False
+            # winsound.PlaySound(None, winsound.SND_ASYNC)
+            clap_flag = False
 
         if flag0 != flag1:
             print("===========>alarm<===========")
@@ -38,7 +41,10 @@ def main():
             print("===========>alarm<===========")
             print("===========>alarm<===========")
             print("===========>alarm<===========")
-            winsound.PlaySound('alarm.wav',winsound.SND_ASYNC)
+            # winsound.PlaySound('alarm.wav',winsound.SND_ASYNC)
+            pygame.mixer.music.play()
+            while pygame.mixer.music.get_busy() == True:
+                continue
             
             flag0 = flag1
         frame_cnt += 1
