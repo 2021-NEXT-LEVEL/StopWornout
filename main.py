@@ -1,7 +1,8 @@
-import cv2
+from cv2 import cv2
 import mediapipe as mp
 from datetime import datetime
-from playsound import playsound
+import winsound
+
 
 def main():
     cap = cv2.VideoCapture(0) 
@@ -28,7 +29,7 @@ def main():
         
         # 제스처 인식 시, 알람 끄기
         if clap_flag == True:
-           # winsound.PlaySound(None, winsound.SND_ASYNC)
+           winsound.PlaySound(None, winsound.SND_ASYNC)
            clap_flag = False
 
         if flag0 != flag1:
@@ -37,7 +38,7 @@ def main():
             print("===========>alarm<===========")
             print("===========>alarm<===========")
             print("===========>alarm<===========")
-            # winsound.PlaySound('alarm.wav',winsound.SND_ASYNC)
+            winsound.PlaySound('alarm.wav',winsound.SND_ASYNC)
             
             flag0 = flag1
         frame_cnt += 1
@@ -81,7 +82,6 @@ def main():
         if clap_count == 3:
             clap_count = 0
             clap_flag = True
-            playsound("alarm.wav")
 
         cv2.imshow("Image", img)
         cv2.waitKey(1)
