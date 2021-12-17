@@ -3,4 +3,4 @@
 # mediapipe------------------------------------
 opencv-python
 mediapipe
-
+pygame
